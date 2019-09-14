@@ -14,8 +14,8 @@ public class BranchDao {
 
 	public BankDetail find(String ifscCode) {
 		BankDetail bankDetails = null;
-		try (Connection connection = DriverManager.getConnection("jdbc:postgresql://ec2-174-129-208-118.compute-1.amazonaws.com:5432/d88bsp3slsg5pi", "nbdrrgdsvvzpol",
-				"b41fc0af2d3ebd03796a33ca59ee39cac0f641afb396302060cea1473b31bcd5")) {
+		try (Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/main", "postgres",
+				"system")) {
 			Statement statement = connection.createStatement();
 			ResultSet resultSet = statement.executeQuery("select * from banks b,branches br where b.id=br.bank_id and br.ifsc = '"+ifscCode+"'");
 			if (resultSet.next()) {
