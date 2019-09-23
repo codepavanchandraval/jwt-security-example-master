@@ -4,6 +4,7 @@ import com.techprimers.security.jwtsecurity.model.JwtAuthenticationToken;
 import com.techprimers.security.jwtsecurity.model.JwtUser;
 import com.techprimers.security.jwtsecurity.model.JwtUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
 import org.springframework.security.core.AuthenticationException;
@@ -19,6 +20,9 @@ public class JwtAuthenticationProvider extends AbstractUserDetailsAuthentication
 
     @Autowired
     private JwtValidator validator;
+    
+    @Autowired
+    private Environment environment;
 
     @Override
     protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken) throws AuthenticationException {
@@ -30,13 +34,10 @@ public class JwtAuthenticationProvider extends AbstractUserDetailsAuthentication
 
         JwtAuthenticationToken jwtAuthenticationToken = (JwtAuthenticationToken) usernamePasswordAuthenticationToken;
         String token = jwtAuthenticationToken.getToken();
-
-        JwtUser jwtUser = validator.validate(token);
-
+        JwtUser jwtUser = validator.validate(token,environment);
         if (jwtUser == null) {
             throw new RuntimeException("JWT Token is incorrect");
         }
-
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils
                 .commaSeparatedStringToAuthorityList(jwtUser.getUserName());
         return new JwtUserDetails(jwtUser.getUserName(),

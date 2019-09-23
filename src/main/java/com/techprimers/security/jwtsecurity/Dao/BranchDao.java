@@ -1,7 +1,6 @@
 package com.techprimers.security.jwtsecurity.Dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -14,8 +13,8 @@ public class BranchDao {
 
 	public BankDetail find(String ifscCode) {
 		BankDetail bankDetails = null;
-		try (Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/main", "postgres",
-				"system")) {
+		try {
+			Connection connection = DbConnectionProvider.getConnection();
 			Statement statement = connection.createStatement();
 			ResultSet resultSet = statement.executeQuery("select * from banks b,branches br where b.id=br.bank_id and br.ifsc = '"+ifscCode+"'");
 			if (resultSet.next()) {
@@ -36,8 +35,8 @@ public class BranchDao {
 
 	public List<BankDetail> findAll(String bankName, String city, int limit,int offset) {
 		List<BankDetail> bankDetails = null;
-		try (Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/main", "postgres",
-				"system")) {
+		try {
+			Connection connection = DbConnectionProvider.getConnection();
 			Statement statement = connection.createStatement();
 			ResultSet resultSet = statement.executeQuery("select * from banks b,branches br where b.id=br.bank_id and b.name='"+bankName+"' and br.city='"+city+"' limit "+limit+" offset "+offset+"");
 			bankDetails = new ArrayList<>();
