@@ -1,9 +1,11 @@
 //To get the token that is valid for five days.
-curl -X POST https://bank-details1.herokuapp.com/token?userName=PavanChandraval
-//JWT TOKEN is eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQYXZhbkNoYW5kcmF2YWwiLCJleHAiOjE1NzA1NTIwOTR9.yNyMhtQQpwcoUIFWloIe1YpSo3_moq9XUIQNrAkWZbA
-curl -H "Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQYXZhbkNoYW5kcmF2YWwiLCJleHAiOjE1NzA1NTIwOTR9.yNyMhtQQpwcoUIFWloIe1YpSo3_moq9XUIQNrAkWZbA" https://bank-details1.herokuapp.com/rest/hello
+curl -X POST https://hellobanks.herokuapp.com/token?userName=PavanChandraval
 
+//To check the weather JWT token is working fine or not 
+curl -H "Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQYXZhbkNoYW5kcmF2YWwiLCJleHAiOjE1NzA2ODY1Mjd9.N3nIPpyEGS3T--TyNNJKly26tKHhLQQwaF2YjP-sMK4" https://hellobanks.herokuapp.com/rest/hello
 
-curl -H "Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQYXZhbkNoYW5kcmF2YWwiLCJleHAiOjE1NzA1NTIwOTR9.yNyMhtQQpwcoUIFWloIe1YpSo3_moq9XUIQNrAkWZbA" https://bank-details1.herokuapp.com/rest/findBank?ifscCode=ABHY0065001
+// to get the bank detail from IFSC code 
+curl -H "Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQYXZhbkNoYW5kcmF2YWwiLCJleHAiOjE1NzA2ODY1Mjd9.N3nIPpyEGS3T--TyNNJKly26tKHhLQQwaF2YjP-sMK4" https://hellobanks.herokuapp.com/rest/findBank?ifscCode=ABHY0065001
 
-curl -H "Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQYXZhbkNoYW5kcmF2YWwiLCJleHAiOjE1NzA1NTIwOTR9.yNyMhtQQpwcoUIFWloIe1YpSo3_moq9XUIQNrAkWZbA" https://bank-details1.herokuapp.com/rest/findAllBank?bankName=ABHYUDAYA%20COOPERATIVE%20BANK%20LIMITED&city=MUMBAI&limit=20&offset=0
+// to get the bank details from other parameters 
+curl -H "Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQYXZhbkNoYW5kcmF2YWwiLCJleHAiOjE1NzA2ODY1Mjd9.N3nIPpyEGS3T--TyNNJKly26tKHhLQQwaF2YjP-sMK4" https://hellobanks.herokuapp.com/rest/findAllBank?bankName=ABHYUDAYA%20COOPERATIVE%20BANK%20LIMITED&city=MUMBAI&limit=20&offset=0
